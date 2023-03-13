@@ -1,0 +1,22 @@
+version: '3.4'
+services:
+  sql_image:
+    image: sql_image:latest
+    ports:
+    - 3306:3306
+    environment:
+    - MYSQL_ROOT_PASSWORD=root
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+  java_image:
+    image: java_image:latest
+    depends_on:
+      sql_image:
+        condition: service_healthy
+    
+networks:
+  default:
+    name: my-bridge-network
+    external: true      
