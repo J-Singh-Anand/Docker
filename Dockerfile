@@ -4,7 +4,6 @@ COPY database_demo.sql /docker-entrypoint-initdb.d/
 
 
 
-
 FROM ubuntu:22.04 AS img_java_fetch
 
 RUN apt update
